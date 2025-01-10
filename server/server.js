@@ -21,7 +21,7 @@ const app = express();
 
 // Middleware setup
 app.use(cors({
-  origin: 'http://localhost:5173',   // Allow requests from the frontend URL
+  origin: 'https://hospital-food-management-system-gtnz.vercel.app',   // Allow requests from the frontend URL
   methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Specify allowed methods
   credentials: true,  // Allow cookies or credentials to be included in the request
 }));
