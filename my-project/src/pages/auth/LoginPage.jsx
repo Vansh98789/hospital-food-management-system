@@ -47,6 +47,10 @@ const LoginPage = () => {
     }
   };
 
+  const handleSignUpRedirect = () => {
+    navigate('/signup');  // Navigate to the SignUp page when clicked
+  };
+
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="bg-white p-8 rounded shadow-lg w-80">
@@ -80,6 +84,15 @@ const LoginPage = () => {
             {loading ? 'Logging in...' : 'Login'}
           </Button>
         </form>
+        {/* Sign Up button */}
+        <div className="mt-4 text-center">
+          <button
+            className="text-blue-500 hover:underline"
+            onClick={handleSignUpRedirect}
+          >
+            Don't have an account? Sign up
+          </button>
+        </div>
       </div>
     </div>
   );
