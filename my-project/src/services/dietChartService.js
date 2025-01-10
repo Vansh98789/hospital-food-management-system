@@ -1,6 +1,6 @@
 // /services/dietChartService.js
 import axios from 'axios';
-const API_URL = 'http://localhost:9878/api/diet-charts';
+const API_URL = 'https://hospital-food-management-sy-git-287cc8-vanshs-projects-a0570c07.vercel.app/api/diet-charts';
 
 // Fetch diet chart by patient ID
 const getDietChartByPatientId = async (token, patientId) => {
