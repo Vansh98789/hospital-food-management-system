@@ -14,8 +14,8 @@ const TaskAssignment = () => {
   // Fetch patients and pantry staff data
   useEffect(() => {
     const fetchData = async () => {
-      const patientsRes = await fetch('https://hospital-food-management-sy-git-287cc8-vanshs-projects-a0570c07.vercel.app//api/patients');
-      const staffRes = await fetch('https://hospital-food-management-sy-git-287cc8-vanshs-projects-a0570c07.vercel.app//api/pantry-staff');
+      const patientsRes = await fetch('https://hospital-food-management-system-nine.vercel.app/api/patients');
+      const staffRes = await fetch('https://hospital-food-management-system-nine.vercel.app/api/pantry-staff');
       setPatients(await patientsRes.json());
       setPantryStaff(await staffRes.json());
     };
@@ -48,7 +48,7 @@ const TaskAssignment = () => {
         return;
       }
 
-      const res = await fetch('https://hospital-food-management-sy-git-287cc8-vanshs-projects-a0570c07.vercel.app/api/tasks', {
+      const res = await fetch('https://hospital-food-management-system-nine.vercel.app/api/tasks', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
