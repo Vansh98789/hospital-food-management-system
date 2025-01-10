@@ -1,4 +1,4 @@
-const db = require('../config/db');  // Import the db client (db.js)
+const pool = require('../config/db');  // Import the PostgreSQL pool
 
 // POST request to create a meal task
 const createTask = async (req, res) => {
@@ -10,13 +10,18 @@ const createTask = async (req, res) => {
       return res.status(400).json({ message: 'Patient ID, Meal Type, and Delivery Personnel ID are required' });
     }
 
+    // Get a client from the pool
+    const client = await pool.connect();
+
     // Insert meal task into the database
-    const result = await db.query(
+    const result = await client.query(
       'INSERT INTO tasks (patient_id, meal_type, task_status, delivery_personnel_id, instructions) VALUES ($1, $2, $3, $4, $5) RETURNING *',
       [patient_id, meal_type, task_status || 'Pending', delivery_personnel_id, instructions || '']
     );
 
     const newTask = result.rows[0];
+    client.release();  // Release the client back to the pool
+
     res.status(201).json(newTask);
   } catch (error) {
     console.error('Error creating task:', error);
@@ -24,11 +29,17 @@ const createTask = async (req, res) => {
   }
 };
 
-
 // GET request to get all tasks
 const getAllTasks = async (req, res) => {
   try {
-    const result = await db.query('SELECT * FROM tasks');
+    // Get a client from the pool
+    const client = await pool.connect();
+
+    // Query to get all tasks
+    const result = await client.query('SELECT * FROM tasks');
+
+    client.release();  // Release the client back to the pool
+
     res.status(200).json(result.rows);
   } catch (error) {
     console.error('Error fetching tasks:', error);
@@ -41,10 +52,18 @@ const getTasksByPatientId = async (req, res) => {
   const { patient_id } = req.params;
 
   try {
-    const result = await db.query('SELECT * FROM tasks WHERE patient_id = $1', [patient_id]);
+    // Get a client from the pool
+    const client = await pool.connect();
+
+    // Query to get tasks for the patient
+    const result = await client.query('SELECT * FROM tasks WHERE patient_id = $1', [patient_id]);
+
+    client.release();  // Release the client back to the pool
+
     if (result.rows.length === 0) {
       return res.status(404).json({ message: 'No tasks found for this patient' });
     }
+
     res.status(200).json(result.rows);
   } catch (error) {
     console.error('Error fetching tasks:', error);
@@ -62,11 +81,17 @@ const updateTaskStatus = async (req, res) => {
   }
 
   try {
-    const result = await db.query(
-      'UPDATE tasks SET status = $1, completed_at = NOW() WHERE id = $2 RETURNING *',
+    // Get a client from the pool
+    const client = await pool.connect();
+
+    // Update the task status
+    const result = await client.query(
+      'UPDATE tasks SET task_status = $1, completed_at = NOW() WHERE id = $2 RETURNING *',
       [status, id]
     );
-    
+
+    client.release();  // Release the client back to the pool
+
     if (result.rows.length === 0) {
       return res.status(404).json({ message: 'Task not found' });
     }
@@ -83,8 +108,14 @@ const deleteTask = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const result = await db.query('DELETE FROM tasks WHERE id = $1 RETURNING *', [id]);
-    
+    // Get a client from the pool
+    const client = await pool.connect();
+
+    // Delete the task
+    const result = await client.query('DELETE FROM tasks WHERE id = $1 RETURNING *', [id]);
+
+    client.release();  // Release the client back to the pool
+
     if (result.rows.length === 0) {
       return res.status(404).json({ message: 'Task not found' });
     }
