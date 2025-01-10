@@ -20,7 +20,7 @@ const PatientDetail = () => {
           return;
         }
 
-        const res = await fetch(`https://hospital-food-management-sy-git-287cc8-vanshs-projects-a0570c07.vercel.app/api/patients/${id}`, {
+        const res = await fetch(`https://hospital-food-management-system-nine.vercel.app/api/patients/${id}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
