@@ -1,17 +1,13 @@
-const { Client } = require('pg');  // Import pg.Client
-require('dotenv').config();  // Make sure .env variables are loaded
+const { Pool } = require('pg');  // Destructure Pool from the pg module
+require('dotenv').config();  // Ensure environment variables are loaded
 
-// Database connection using pg.Client
-const db = new Client({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT,
+// Create a new Pool instance using the DATABASE_URLS environment variable
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URLS,  // Use the DATABASE_URLS from .env file
+  ssl: {
+    rejectUnauthorized: false,  // Necessary for cloud databases (e.g., Neon, Heroku)
+  },
 });
 
-db.connect()  // Establish the connection to the database
-  .then(() => console.log('Connected to the database successfully'))
-  .catch(err => console.error('Error connecting to the database:', err));
-
-module.exports = db;
+// Export the pool instance for use in other files
+module.exports = pool;
