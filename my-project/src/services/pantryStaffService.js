@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:9878/api/pantry-staff';  // Replace with your actual API URL
+const API_URL = 'https://hospital-food-management-sy-git-287cc8-vanshs-projects-a0570c07.vercel.app/api/pantry-staff';  // Replace with your actual API URL
 
 // Fetch all pantry staff members
 const getStaff = async (token) => {
