@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:9878/api/auth';  // Replace with your actual API URL
+const API_URL = 'https://hospital-food-management-sy-git-287cc8-vanshs-projects-a0570c07.vercel.app/api/auth';  // Replace with your actual API URL
 
 // Login request
 const login = async (email, password) => {
