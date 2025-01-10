@@ -23,7 +23,7 @@ const LoginPage = () => {
     setError(null);
 
     try {
-      const res = await fetch('https://hospital-food-management-sy-git-287cc8-vanshs-projects-a0570c07.vercel.app/api/auth/login', {
+      const res = await fetch('https://hospital-food-management-system-nine.vercel.app/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',  // Include cookies or authentication tokens
