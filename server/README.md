@@ -1,94 +1,40 @@
-backend functionality req=>
-Implement authentication (JWT or OAuth).
-CRUD operations for managing patient details.
-CRUD operations for managing food/diet charts.
-Assigning tasks to the inner pantry.
-Marking deliveries as complete.
+<h1>backend functionality req=></h1>
+<p>Implement authentication (JWT or OAuth).</p>
+<p>CRUD operations for managing patient details.</p>
+<p>CRUD operations for managing food/diet charts.</p>
+<p>Assigning tasks to the inner pantry.</p>
+<p>Marking deliveries as complete.</p>
 
 
-implimentation=>
+<h1>implimentation=></h1>
 
-Authentication-
-=>Login (JWT Authentication)  :POST /auth/login
+<h2>Authentication-</h2>
+<p>=>Login (JWT Authentication)  :POST /auth/login</p>
 
-Patient Management-
-=>Create a Patient  :POST /api/patients
-=>Get All Patients  :GET /api/patients
-=>Get Patient by ID  :GET /api/patients/:id
-=>Update Patient Details  :PUT /api/patients/:id
-=>Delete Patient  :DELETE /api/patients/:id
+<h2>Patient Management-</h2>
+<p>=>Create a Patient  :POST /api/patients</p>
+<p>=>Get All Patients  :GET /api/patients</p>
+<p>=>Get Patient by ID  :GET /api/patients/:id</p>
+<p>=>Update Patient Details  :PUT /api/patients/:id</p>
+<p>=>Delete Patient  :DELETE /api/patients/:id</p>
 
-Diet Chart Management-
-=>Create Diet Chart  :POST /api/diet-charts
-=>Get Diet Chart by Patient ID  :GET /api/diet-charts/:patient_id
-=>Update Diet Chart  :PUT /api/diet-charts/:id
-=>Delete Diet Chart  :DELETE /api/diet-charts/:id
+<h2>Diet Chart Management-</h2>
+<p>=>Create Diet Chart  :POST /api/diet-charts</p>
+<p>=>Get Diet Chart by Patient ID  :GET /api/diet-charts/:patient_id</p>
+<p>=>Update Diet Chart  :PUT /api/diet-charts/:id</p>
+<p>=>Delete Diet Chart  :DELETE /api/diet-charts/:id</p>
 
-Pantry Staff Management-
-=>Create Pantry Staff  :POST /api/pantry-staff
-=>Get All Pantry Staff  :GET /api/pantry-staff
-=>Update Pantry Staff  :PUT /api/pantry-staff/:id
-=>Delete Pantry Staff  :DELETE /api/pantry-staff/:id
+<h2>Pantry Staff Management-</h2>
+<p>=>Create Pantry Staff  :POST /api/pantry-staff</p>
+<p>=>Get All Pantry Staff  :GET /api/pantry-staff</p>
+<p>=>Update Pantry Staff  :PUT /api/pantry-staff/:id</p>
+<p>=>Delete Pantry Staff  :DELETE /api/pantry-staff/:id</p>
 
-Meal Delivery Task Management-
-=> Create Meal Task  :POST /api/tasks
-=> Get All Tasks  :GET /api/tasks
-=>Get Task by ID  :GET /api/tasks/:id
-=>Update Task Status( Mark as Delivered)  :PUT /api/tasks/:id
-
-
+<h2>Meal Delivery Task Management-</h2>
+<p>=> Create Meal Task  :POST /api/tasks</p>
+<p>=> Get All Tasks  :GET /api/tasks</p>
+<p>=>Get Task by ID  :GET /api/tasks/:id</p>
+<p>=>Update Task Status( Mark as Delivered)  :PUT /api/tasks/:id</p>
 
 
 
-/server
-  ├── /config                    # Configuration files (e.g., DB, JWT, environment variables)
-  │   ├── db.js                  # Database connection (PostgreSQL)
-  │   ├── jwtConfig.js           # JWT configuration (secret, options, etc.)
-  │   └── config.js              # Other configuration (environment variables)
-  │
-  ├── /controllers               # All the controllers for your endpoints
-  │   ├── authController.js      # Handle login, registration, JWT token creation
-  │   ├── patientController.js   # Handle CRUD operations for patients
-  │   ├── dietChartController.js # Handle CRUD operations for diet charts
-  │   ├── pantryStaffController.js # Handle CRUD operations for pantry staff
-  │   └── taskController.js      # Handle meal task management (assign, update status)
-  │
-  ├── /models                    # Database models
-  │   ├── patientModel.js        # Patient model (defines schema, validation)
-  │   ├── dietChartModel.js      # Diet chart model (defines schema, validation)
-  │   ├── pantryStaffModel.js    # Pantry staff model
-  │   ├── deliveryPersonnelModel.js # Delivery personnel model
-  │   └── taskModel.js           # Meal task model
-  │
-  ├── /routes                    # API routes
-  │   ├── authRoutes.js          # Authentication routes (login)
-  │   ├── patientRoutes.js       # Patient management routes
-  │   ├── dietChartRoutes.js     # Diet chart management routes
-  │   ├── pantryStaffRoutes.js   # Pantry staff management routes
-  │   └── taskRoutes.js          # Meal task management routes
-  │
-  ├── /middleware                # Custom middleware
-  │   ├── authMiddleware.js      # JWT authentication middleware (verify token)
-  │   ├── errorMiddleware.js     # Handle and log errors in API requests
-  │   └── validateMiddleware.js  # Validation middleware for input data
-  │
-  ├── /utils                     # Utility functions or helpers
-  │   ├── generateToken.js       # Helper function to generate JWT tokens
-  │   ├── hashPassword.js        # Helper function to hash passwords
-  │   └── validateInput.js       # Helper for input validation
-  │
-  ├── /validators                # Input validation schemas (using something like Joi)
-  │   ├── patientValidator.js    # Validation for patient-related data
-  │   ├── dietChartValidator.js  # Validation for diet chart data
-  │   ├── pantryStaffValidator.js # Validation for pantry staff data
-  │   └── taskValidator.js       # Validation for task-related data
-  │
-  ├── /services                  # Service layer (Optional, for business logic)
-  │   └── taskService.js         # Task management logic (separate from controllers)
-  │
-  ├── /logs                      # Logs for server, errors, etc.
-  │   └── server.log             # Example log file
-  │
-  ├── server.js                  # Entry point for your Express app
-  ├── package.json               # Project metadata and dependencies
-  └── .env                       # Environment variables (database URL, JWT secret, etc.)
