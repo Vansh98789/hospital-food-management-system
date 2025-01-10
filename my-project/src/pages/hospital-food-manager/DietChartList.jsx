@@ -23,7 +23,7 @@ const DietChartList = () => {
           return;
         }
 
-        const res = await fetch(`http://localhost:9878/api/diet-charts/${patientId}`, {
+        const res = await fetch(`https://hospital-food-management-sy-git-287cc8-vanshs-projects-a0570c07.vercel.app/api/diet-charts/${patientId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
